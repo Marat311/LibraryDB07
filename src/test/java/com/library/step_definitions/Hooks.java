@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class Hooks {
 
 
-    @BeforeAll
+   /* @BeforeAll
     public static void connect(){
 
         String url = ConfigReader.read("library2.database.url");
@@ -25,6 +25,7 @@ public class Hooks {
 
         DB_Util.createConnection(url, username, password);
     }
+    */
 
 
     //close the connection

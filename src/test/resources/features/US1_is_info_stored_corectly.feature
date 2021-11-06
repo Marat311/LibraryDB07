@@ -1,6 +1,6 @@
 @vit
 Feature:
-  As a data consumer, I want the user informations are stored in mySQL DB correctly in
+  As a data consumer, I want the user information are stored in mySQL DB correctly in
   users table.
 
   Background:

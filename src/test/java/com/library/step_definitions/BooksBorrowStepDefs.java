@@ -15,8 +15,8 @@ public class BooksBorrowStepDefs {
     }
     @Then("verify what is the most popular book genre.")
     public void verify_what_is_the_most_popular_book_genre() {
-        int bookFromBookTable = DB_Util.getColumnDataAsList(1).size();
-        int bookFromBook_BorrowTable = DB_Util.getColumnDataAsList(2).size();
-        assertEquals(bookFromBookTable, bookFromBook_BorrowTable );
+        int expectedResulted = DB_Util.getColumnDataAsList(1).size();
+        int actualResulted = DB_Util.getColumnDataAsList(2).size();
+        assertEquals(expectedResulted, actualResulted );
     }
 }

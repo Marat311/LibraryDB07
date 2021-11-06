@@ -31,7 +31,7 @@ public class LoginPage {
 
     public void login() {
 
-        this.usernameBox.sendKeys(ConfigReader.read("libraryCT.username"));
+        this.usernameBox.sendKeys(ConfigReader.read("libraryCT.username1"));
         this.passwordBox.sendKeys(ConfigReader.read("libraryCT.password"));
         this.loginButton.click();
 

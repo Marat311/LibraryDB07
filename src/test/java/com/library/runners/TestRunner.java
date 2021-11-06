@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt",
                 "me.jvt.cucumber.report.PrettyReports:target" // this is for detailed html report
         } ,
-        dryRun = false
-          , tags ="@us5"
+        dryRun = true
+         // , tags ="@us5"
 )
 
 public class TestRunner {

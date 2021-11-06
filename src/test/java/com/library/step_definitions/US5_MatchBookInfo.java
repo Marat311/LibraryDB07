@@ -18,6 +18,7 @@ public class US5_MatchBookInfo {
     DashboardPage dp = new DashboardPage();
     BooksPage b = new BooksPage();
     List<Map<String, String>> booksName;
+    List<Map<String, String>> bookCategories;
 
     @Given("I am in the homepage of library app")
     public void i_am_in_the_homepage_of_library_app() {
@@ -40,7 +41,7 @@ public class US5_MatchBookInfo {
         DB_Util.runQuery("select name, author, year FROM books where name = 'Harry Potter' and year=2000 and author='Djoan Rowling'") ;
         booksName = DB_Util.getAllRowAsListOfMap();
         System.out.println("booksName = " + booksName);
-        DB_Util.destroy();
+
 
     }
 
@@ -57,8 +58,27 @@ public class US5_MatchBookInfo {
                     for (Map.Entry<String, String> entry : map.entrySet()) {
                         Assert.assertEquals(b.getBookInfo(entry.getKey()), entry.getValue());
                     }
-                }
+        }
     }
+
+
+
+    @When("I execute query to get book categories")
+    public void i_execute_query_to_get_book_categories() {
+        DB_Util.runQuery("select * from book_categories");
+        bookCategories = DB_Util.getAllRowAsListOfMap();
+        System.out.println("list = " + bookCategories);
+
+    }
+    @Then("verify book categories must match book_categories table from db")
+    public void verify_book_categories_must_match_book_categories_table_from_db() {
+        for (Map<String, String> map : bookCategories) {
+            Assert.assertEquals(map.get("name"),b.getBookInfo("Book Category"));
+        }
+
+    }
+
+
 
 
 

@@ -4,7 +4,7 @@ import com.library.utilities.BrowserUtil;
 import com.library.utilities.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
-
+import org.openqa.selenium.support.ui.Select;
 
 
 public class BooksPage {
@@ -39,9 +39,12 @@ public class BooksPage {
         } else if (info.equals("ISBN")) {
             value = Driver.getDriver().findElement(By.xpath("(//input[@type = 'text'])[" + 2 + "]")).getAttribute("value");
 
+        }else if (info.equals("Book Category")){
+          //  Select select = new Select(Driver.getDriver().findElement(By.xpath("//select[@id='book_categories']")));
+          //  select.getOptions();
+            value = Driver.getDriver().findElement(By.xpath("//select[@id='book_categories']")).getText();
         }
 
-        //Driver.getDriver().findElement(By.xpath("//button[@type='cancel']")).click();
         return value;
     }
 

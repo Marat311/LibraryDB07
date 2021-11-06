@@ -13,7 +13,7 @@ import org.junit.runner.RunWith;
                 "me.jvt.cucumber.report.PrettyReports:target" // this is for detailed html report
         } ,
         dryRun = false
-        //  , tags ="@calculator" //"not @ui"   //"@smoke or @salad"
+          , tags ="@us5"
 )
 
 public class TestRunner {

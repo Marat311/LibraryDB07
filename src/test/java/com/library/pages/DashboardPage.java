@@ -1,6 +1,7 @@
 package com.library.pages;
 
 import com.library.utilities.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +16,8 @@ public class DashboardPage {
 
     @FindBy(id = "borrowed_books")
     public WebElement borrowedBookCount;
+
+
 
 
     public DashboardPage(){
@@ -38,6 +41,12 @@ public class DashboardPage {
         String borrowedBookCountText = this.borrowedBookCount.getText();
         Integer borrowedBookCount = Integer.parseInt(borrowedBookCountText);
         return borrowedBookCount;
+    }
+
+    public  void navigateTo(String name){
+
+        Driver.getDriver().findElement(By.xpath("//span[text()='"+name+"']")).click();
+
     }
 
 

@@ -3,9 +3,9 @@ package com.library.step_definitions;
 import com.library.utilities.ConfigReader;
 import com.library.utilities.DB_Util;
 import com.library.utilities.Driver;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.OutputType;
@@ -34,21 +34,20 @@ public class Hooks {
         DB_Util.destroy();
     }
 
-    @Before()
+    @Before("@ui")
     public void setupDriver(){
-        System.out.println("This is from @Before inside Hooks class");
         //setup implicit wait
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Driver.getDriver().manage().window().maximize();
 
     }
 
-    @After()
-    public void tearDown(Scenario scenario) {
+    @After("@ui")
+    public void tearDown(Scenario scenario){
 
         //check if scenario failed or not
 
-        if (scenario.isFailed()) {
+        if(scenario.isFailed()){
             //this is how we take screenshot in selenium
             TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
             byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);

@@ -8,4 +8,3 @@ Feature: As a librarian, I want to know who borrowed books.
     When I execute query to inner join users and book_borrow on Id
     Then verify amount of people who had borrowed books
 
-    #test test test

@@ -43,10 +43,13 @@ public class BooksPage {
         } else if (info.equals("ISBN")) {
             value = Driver.getDriver().findElement(By.xpath("(//input[@type = 'text'])[" + 2 + "]")).getAttribute("value");
 
-        }else if (info.equals("Book Category")){
-          //  Select select = new Select(Driver.getDriver().findElement(By.xpath("//select[@id='book_categories']")));
-          //  select.getOptions();
-            value = Driver.getDriver().findElement(By.xpath("//select[@id='book_categories']")).getText();
+        }else if (info.equals("book_categories")){
+           Select select = new Select(Driver.getDriver().findElement(By.xpath("//select[@id='"+info+"']")));
+            List <WebElement> selectOptions= select.getAllSelectedOptions();
+            for (WebElement option : selectOptions) {
+                value+= option.getText()+", ";
+            }
+
         }
 
         return value;
@@ -54,9 +57,9 @@ public class BooksPage {
 
     public List<String> getBookInformation (String info){
         List<String> value= new ArrayList<>();
-        Driver.getDriver().findElement(By.xpath("//input[@type='search']")).sendKeys("Harry Potter");
+        Driver.getDriver().findElement(By.xpath("//label[text()='Search:']/input")).sendKeys("Djoan Rowling");
 
-        List<WebElement>list = Driver.getDriver().findElements(By.xpath("//td[text()='"+info+"']/.."));
+        List<WebElement>list = Driver.getDriver().findElements(By.xpath("//td[text()='"+info+"']"));
         for (WebElement webElement : list) {
             value.add(webElement.getText());
         }

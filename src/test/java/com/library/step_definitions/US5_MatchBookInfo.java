@@ -9,6 +9,8 @@ import io.cucumber.java.en.*;
 import org.junit.Assert;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -67,15 +69,26 @@ public class US5_MatchBookInfo {
     public void i_execute_query_to_get_book_categories() {
         DB_Util.runQuery("select * from book_categories");
         bookCategories = DB_Util.getAllRowAsListOfMap();
-        System.out.println("list = " + bookCategories);
+        for (Map<String, String> category : bookCategories) {
+            System.out.println(category);
+        }
+
 
     }
     @Then("verify book categories must match book_categories table from db")
     public void verify_book_categories_must_match_book_categories_table_from_db() {
 
-        System.out.println("b.getBookInformation(\"Harry Potter\") = " + b.getBookInformation("Harry Potter"));
+       // System.out.println("b.getBookInformation(\"Harry Potter\") = " + b.getBookInformation("Harry Potter"));
+        System.out.println("b.getBookInfo(\"book_categories\") = " + b.getBookInfo("book_categories"));
+        String books = b.getBookInfo("book_categories");
+        List<String> book_categories = new ArrayList<>(Arrays.asList(books.split(",")));
+        System.out.println("book_categories = " + book_categories);
         for (Map<String, String> map : bookCategories) {
-            Assert.assertEquals(map.get("name"),b.getBookInfo("Book Category"));
+            for (String category : book_categories) {
+
+                Assert.assertEquals(map.get("name"),category);
+            }
+
         }
 
     }

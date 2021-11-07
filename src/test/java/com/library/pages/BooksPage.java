@@ -8,7 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
 
 
 public class BooksPage {
@@ -45,15 +48,41 @@ public class BooksPage {
 
         }else if (info.equals("book_categories")){
            Select select = new Select(Driver.getDriver().findElement(By.xpath("//select[@id='"+info+"']")));
-            List <WebElement> selectOptions= select.getAllSelectedOptions();
+            List <WebElement> selectOptions= select.getOptions();
             for (WebElement option : selectOptions) {
-                value+= option.getText()+", ";
+                value+= option.getText()+",";
             }
 
         }
 
         return value;
     }
+
+    public List<String> book_categoriesValue(String data){
+        String []books = data.split(",");
+        List <String> actualR = new ArrayList<>();
+        for (int i =1; i<books.length; i++){
+            actualR.add(books[i]);
+        }
+        return actualR;
+    }
+
+   /* public Map<String, String> getUniqueValue(){
+        BiFunction<String, String, Map<String, String>> mergeArraysIntoList = (a, b) -> {
+
+            Map<String, String> dataValue = new LinkedHashMap<>();
+
+            for (int each : a)
+                list.add(each);
+
+            for (int each : b)
+                list.add(each);
+
+            return list;
+        };
+    }
+
+    */
 
     public List<String> getBookInformation (String info){
         List<String> value= new ArrayList<>();

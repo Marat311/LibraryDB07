@@ -8,6 +8,8 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 
+
+
 import org.junit.jupiter.api.AfterAll;
 
 import org.openqa.selenium.OutputType;
@@ -36,21 +38,20 @@ public class Hooks {
         DB_Util.destroy();
     }
 
-    @Before()
+    @Before("@ui")
     public void setupDriver(){
-        System.out.println("This is from @Before inside Hooks class");
         //setup implicit wait
         Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Driver.getDriver().manage().window().maximize();
 
     }
 
-    @After()
-    public void tearDown(Scenario scenario) {
+    @After("@ui")
+    public void tearDown(Scenario scenario){
 
         //check if scenario failed or not
 
-        if (scenario.isFailed()) {
+        if(scenario.isFailed()){
             //this is how we take screenshot in selenium
             TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
             byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);

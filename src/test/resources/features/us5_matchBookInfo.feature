@@ -18,4 +18,4 @@ Feature: As a data consumer, I want UI and DB book information are match.
     And I open a book called "Harry Potter"
     When Establish the database connection
     And I execute query to get book categories
-    Then verify book categories must match book_categories table from db
+    Then verify book categories must match "book_categories" table from db

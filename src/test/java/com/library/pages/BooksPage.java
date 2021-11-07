@@ -8,10 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.BiFunction;
+
 
 
 public class BooksPage {
@@ -67,24 +65,7 @@ public class BooksPage {
         return actualR;
     }
 
-   /* public Map<String, String> getUniqueValue(){
-        BiFunction<String, String, Map<String, String>> mergeArraysIntoList = (a, b) -> {
-
-            Map<String, String> dataValue = new LinkedHashMap<>();
-
-            for (int each : a)
-                list.add(each);
-
-            for (int each : b)
-                list.add(each);
-
-            return list;
-        };
-    }
-
-    */
-
-    public List<String> getBookInformation (String info){
+      public List<String> getBookInformation (String info){
         List<String> value= new ArrayList<>();
         Driver.getDriver().findElement(By.xpath("//label[text()='Search:']/input")).sendKeys("Djoan Rowling");
 

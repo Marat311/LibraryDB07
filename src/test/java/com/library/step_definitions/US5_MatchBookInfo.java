@@ -41,7 +41,7 @@ public class US5_MatchBookInfo {
     public void i_execute_query_to_get_the_book_information_from_books_table() {
         DB_Util.runQuery("select name, author, year FROM books where name = 'Harry Potter' and year=2000 and author='Djoan Rowling'") ;
         booksName = DB_Util.getAllRowAsListOfMap();
-        System.out.println("booksName = " + booksName);
+
 
 
     }
@@ -70,10 +70,10 @@ public class US5_MatchBookInfo {
         bookCategories = DB_Util.getAllRowAsListOfMap();
 
     }
-    @Then("verify book categories must match book_categories table from db")
-    public void verify_book_categories_must_match_book_categories_table_from_db() {
+    @Then("verify book categories must match {string} table from db")
+    public void verify_book_categories_must_match_table_from_db(String value) {
 
-        List<String> book_categories = b.book_categoriesValue(b.getBookInfo("book_categories"));
+        List<String> book_categories = b.book_categoriesValue(b.getBookInfo(value));
        int num = 0;
         for (Map<String, String> map : bookCategories) {
             Assert.assertEquals(map.get("name"),book_categories.get(num) );

@@ -72,6 +72,8 @@ public class US5_MatchBookInfo {
     }
     @Then("verify book categories must match book_categories table from db")
     public void verify_book_categories_must_match_book_categories_table_from_db() {
+
+        System.out.println("b.getBookInformation(\"Harry Potter\") = " + b.getBookInformation("Harry Potter"));
         for (Map<String, String> map : bookCategories) {
             Assert.assertEquals(map.get("name"),b.getBookInfo("Book Category"));
         }

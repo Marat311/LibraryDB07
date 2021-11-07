@@ -3,8 +3,12 @@ package com.library.pages;
 import com.library.utilities.BrowserUtil;
 import com.library.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class BooksPage {
@@ -46,6 +50,18 @@ public class BooksPage {
         }
 
         return value;
+    }
+
+    public List<String> getBookInformation (String info){
+        List<String> value= new ArrayList<>();
+        Driver.getDriver().findElement(By.xpath("//input[@type='search']")).sendKeys("Harry Potter");
+
+        List<WebElement>list = Driver.getDriver().findElements(By.xpath("//td[text()='"+info+"']/.."));
+        for (WebElement webElement : list) {
+            value.add(webElement.getText());
+        }
+        return value;
+
     }
 
 }

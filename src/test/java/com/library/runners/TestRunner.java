@@ -13,7 +13,11 @@ import org.junit.runner.RunWith;
                 "me.jvt.cucumber.report.PrettyReports:target" // this is for detailed html report
         } ,
         dryRun = false
+
+          , tags ="@user3"
+
         //  , tags =""
+
 
 
 )

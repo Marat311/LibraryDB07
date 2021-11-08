@@ -3,7 +3,12 @@ package com.library.pages;
 import com.library.utilities.BrowserUtil;
 import com.library.utilities.Driver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -39,10 +44,37 @@ public class BooksPage {
         } else if (info.equals("ISBN")) {
             value = Driver.getDriver().findElement(By.xpath("(//input[@type = 'text'])[" + 2 + "]")).getAttribute("value");
 
+        }else if (info.equals("book_categories")){
+           Select select = new Select(Driver.getDriver().findElement(By.xpath("//select[@id='"+info+"']")));
+            List <WebElement> selectOptions= select.getOptions();
+            for (WebElement option : selectOptions) {
+                value+= option.getText()+",";
+            }
+
         }
 
-        //Driver.getDriver().findElement(By.xpath("//button[@type='cancel']")).click();
         return value;
+    }
+
+    public List<String> book_categoriesValue(String data){
+        String []books = data.split(",");
+        List <String> actualR = new ArrayList<>();
+        for (int i =1; i<books.length; i++){
+            actualR.add(books[i]);
+        }
+        return actualR;
+    }
+
+      public List<String> getBookInformation (String info){
+        List<String> value= new ArrayList<>();
+        Driver.getDriver().findElement(By.xpath("//label[text()='Search:']/input")).sendKeys("Djoan Rowling");
+
+        List<WebElement>list = Driver.getDriver().findElements(By.xpath("//td[text()='"+info+"']"));
+        for (WebElement webElement : list) {
+            value.add(webElement.getText());
+        }
+        return value;
+
     }
 
 }

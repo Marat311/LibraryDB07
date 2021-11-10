@@ -3,6 +3,7 @@ package com.library.step_definitions;
 import com.library.utilities.DB_Util;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,8 +20,8 @@ public class BooksBorrowStepDefs {
         String query = "select b.book_category_id, bb.book_id from books b left outer join book_borrow bb on b.id=bb.book_id left outer join book_categories bc on bc.id=b.book_category_id";
         DB_Util.runQuery(query);
     }
-    @Then("verify what is the most popular book genre.")
-    public void verify_what_is_the_most_popular_book_genre() {
+    @Then("verify {string} is the most popular book genre.")
+    public void verify_is_the_most_popular_book_genre(String expectedResult) {
         //getting the list of book_category_ids
         List<String> id = DB_Util.getColumnDataAsList("book_category_id");
 
@@ -46,8 +47,10 @@ public class BooksBorrowStepDefs {
         String query2 = "select name from book_categories where id=" + idOfTheMostPopularGenre;
         DB_Util.runQuery(query2);
 
-        String mostPopularGenre = DB_Util.getCellValue(1, 1);
-        System.out.println("The name of the most popular genre is: " + mostPopularGenre);
+        String actualResult = DB_Util.getCellValue(1, 1);
+        System.out.println("The name of the most popular genre is: " + actualResult);
+
+        Assertions.assertEquals(expectedResult,actualResult);
 
     }
 }

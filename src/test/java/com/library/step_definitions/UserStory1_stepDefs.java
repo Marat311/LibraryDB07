@@ -18,22 +18,24 @@ public class UserStory1_stepDefs {
         DB_Util.runQuery("select Id from users");
         listOfIDs = DB_Util.getColumnDataAsList(1);
 
-
     }
 
-    @Then("verify the result set")
-    public void verify_the_result_set() {
+
+    @Then("verify all users has unique ID")
+    public void verifyAllUsersHasUniqueID() {
 
         int count = 0;
 
         for (String s : listOfIDs) {
+            count = 0;
             for (String f : listOfIDs) {
                 if (s.equals(f)) {
                     count++;
                 }
             }
+            Assertions.assertEquals(count, 1);
+            System.out.println("count = " + count);
         }
-        System.out.println("count" + count + " , list of IDs" + listOfIDs.size());
     }
 
     List<String> actualList = new ArrayList<>();
@@ -54,4 +56,5 @@ public class UserStory1_stepDefs {
 
         Assertions.assertEquals(expectedList, actualList);
     }
+
 }

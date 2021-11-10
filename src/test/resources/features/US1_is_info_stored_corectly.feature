@@ -8,7 +8,7 @@ Feature:
 
   Scenario: verify users have unique IDs
     When Execute query to get all IDs from users
-    Then verify the result set
+    Then verify all users has unique ID
 
   Scenario: verify users table columns
     When Execute query to get all columns

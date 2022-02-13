@@ -1,6 +1,6 @@
 Feature: As a librarian, I want to know who borrowed books.
 
-
+@db @smoke
   Scenario: verify the amount of people who borrowed books
 
 

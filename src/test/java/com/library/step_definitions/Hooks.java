@@ -1,6 +1,7 @@
 package com.library.step_definitions;
 
 
+import com.library.utilities.ConfigReader;
 import com.library.utilities.DB_Util;
 import com.library.utilities.Driver;
 import io.cucumber.java.After;
@@ -10,7 +11,6 @@ import io.cucumber.java.Scenario;
 
 
 
-import org.junit.jupiter.api.AfterAll;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -33,7 +33,21 @@ public class Hooks {
 
 
     //close the connection
-    @AfterAll
+
+    @Before("@db")
+    public static void dbSetup(){
+
+        String url = ConfigReader.read("library2.database.url");
+        String username = ConfigReader.read("library2.database.username");
+        String password = ConfigReader.read("library2.database.password");
+
+        DB_Util.createConnection(url, username, password);
+
+        System.out.println("DB connection created");
+
+    }
+
+    @After("@db")
     public static void tearDown(){
         DB_Util.destroy();
     }

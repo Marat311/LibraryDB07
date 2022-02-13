@@ -5,11 +5,11 @@ Feature:
 
   Background:
     Given Establish the database connection
-
+@db
   Scenario: verify users have unique IDs
     When Execute query to get all IDs from users
     Then verify all users has unique ID
-
+@db
   Scenario: verify users table columns
     When Execute query to get all columns
     Then verify the below columns are listed in result

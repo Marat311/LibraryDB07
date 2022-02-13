@@ -7,7 +7,8 @@ import com.library.utilities.DB_Util;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.Assertions;
+import org.junit.Assert;
+
 
 import java.util.List;
 
@@ -17,12 +18,8 @@ public class UserStory2 {
     @Given("Establish the database connection")
     public void establish_the_database_connection() {
 
+        System.out.println("************ Connection setUp in Hooks ************");
 
-            String url = ConfigReader.read("library2.database.url");
-            String username = ConfigReader.read("library2.database.username");
-            String password = ConfigReader.read("library2.database.password");
-
-            DB_Util.createConnection(url, username, password);
         }
 
 
@@ -40,8 +37,7 @@ public class UserStory2 {
 
         int usersFromUsersTable = DB_Util.getColumnDataAsList(1).size();
         int usersFromBookTable = DB_Util.getColumnDataAsList(2).size();
-        Assertions.assertEquals(usersFromUsersTable, usersFromBookTable);
-
+        Assert.assertEquals(usersFromUsersTable, usersFromBookTable);
     }
 
 

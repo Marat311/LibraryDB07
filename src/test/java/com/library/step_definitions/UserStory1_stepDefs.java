@@ -3,10 +3,12 @@ package com.library.step_definitions;
 import com.library.utilities.DB_Util;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.Assertions;
+import org.junit.Assert;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class UserStory1_stepDefs {
 
@@ -23,6 +25,11 @@ public class UserStory1_stepDefs {
 
     @Then("verify all users has unique ID")
     public void verifyAllUsersHasUniqueID() {
+        Set<String> uniqueIDs = new HashSet<>(listOfIDs);
+        System.out.println("listOfIDs.size() = " + listOfIDs.size());
+        System.out.println("uniqueIDs.size() = " + uniqueIDs.size());
+
+        Assert.assertEquals(listOfIDs.size(),  uniqueIDs.size() );
 
         int count = 0;
 
@@ -33,8 +40,8 @@ public class UserStory1_stepDefs {
                     count++;
                 }
             }
-            Assertions.assertEquals(count, 1);
-            System.out.println("count = " + count);
+            Assert.assertEquals(count, 1);
+
         }
     }
 
@@ -54,7 +61,7 @@ public class UserStory1_stepDefs {
     public void verifyTheBelowColumnsAreListedInResult(List<String> expectedList) {
         System.out.println("expectedList = " + expectedList);
 
-        Assertions.assertEquals(expectedList, actualList);
+        Assert.assertEquals(expectedList, actualList);
     }
 
 }
